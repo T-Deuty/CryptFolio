@@ -1,0 +1,11 @@
+/out:"C:\Users\tadeu\Source\Repos\CryptfolioUWPSolution\CryptFolio-UWP\obj\x64\Release\ilc\intermediate\SgGenerated\\"
+/int:"C:\Users\tadeu\Source\Repos\CryptfolioUWPSolution\CryptFolio-UWP\obj\x64\Release\ilc\intermediate\\"
+/ref:"C:\Users\tadeu\Source\Repos\CryptfolioUWPSolution\CryptFolio-UWP\obj\x64\Release\ilc\intermediate\PreMergeILTransformed"
+/ref:"C:\Users\tadeu\Source\Repos\CryptfolioUWPSolution\CryptFolio-UWP\obj\x64\Release\ilc\intermediate\TransformedSRWR"
+/ref:"C:\Users\tadeu\Source\Repos\CryptfolioUWPSolution\CryptFolio-UWP\obj\x64\Release\ilc\in"
+/ref:"C:\Users\tadeu\Source\Repos\CryptfolioUWPSolution\CryptFolio-UWP\obj\x64\Release\ilc\in\\"
+/ref:"C:\Users\tadeu\Source\Repos\CryptfolioUWPSolution\CryptFolio-UWP\obj\x64\Release\ilc\in\\"
+/ref:"C:\Program Files (x86)\Microsoft SDKs\NuGetPackagesFallback\microsoft.net.native.compiler\1.7.3\tools\x64\ilc\lib\Private\\"
+/ref:"C:\Users\tadeu\Source\Repos\CryptfolioUWPSolution\CryptFolio-UWP\obj\x64\Release\ilc\in\WinMetadata"
+/ca:System.Private.CoreLib
+/cscpath:"C:\Program Files (x86)\Microsoft SDKs\NuGetPackagesFallback\microsoft.net.native.compiler\1.7.3\tools\x64\ilc\csc"
