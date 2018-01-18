@@ -1,25 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Data;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using System.Diagnostics;
-using Windows.UI.Xaml.Hosting;
-using Windows.UI.Composition;
-using System.Numerics;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -219,19 +206,6 @@ namespace CryptFolio
             return null;
         }
 
-        /*
-        private void AutoSuggestBoxAddUserHolding_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (textBoxAddUserHolding.Text != null && textBoxAddUserHolding.Text != "")
-            {
-                addedAmount = Convert.ToDouble(textBoxAddUserHolding.Text);
-            }
-            else
-            {
-                addedAmount = 0.0;
-            }
-        }*/
-
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             // Only get results when it was a user typing, 
@@ -284,7 +258,16 @@ namespace CryptFolio
         {
             if (amountOwnedBox.Text != null && amountOwnedBox.Text != "")
             {
-                addedAmount = Convert.ToDouble(amountOwnedBox.Text);
+                try
+                {
+                    addedAmount = Convert.ToDouble(amountOwnedBox.Text);
+                    addedAmount = Math.Round(addedAmount, 6);
+                }
+                catch (Exception)
+                {
+                    amountOwnedBox.Text = addedAmount.ToString();
+                    FlyoutBase.ShowAttachedFlyout(amountOwnedBox);
+                }
             }
             else
             {
