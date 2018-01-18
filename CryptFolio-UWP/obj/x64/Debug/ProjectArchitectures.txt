@@ -1,1 +1,1 @@
-C:\Users\tadeu\Documents\GitHub\CryptFolio\CryptFolio-UWP\CryptFolio-UWP.csproj;x64
+C:\Users\bjbuc\Source\Repos\CryptFolio\CryptFolio-UWP\CryptFolio-UWP.csproj;x64

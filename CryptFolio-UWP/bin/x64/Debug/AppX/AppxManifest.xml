@@ -15,8 +15,8 @@
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.15063.0" MaxVersionTested="10.0.16299.0" />
-    <PackageDependency Name="Microsoft.NET.CoreRuntime.1.1" MinVersion="1.1.25305.1" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.16299.0" MaxVersionTested="10.0.16299.0" />
+    <PackageDependency Name="Microsoft.NET.CoreRuntime.2.1" MinVersion="2.1.25801.2" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
     <PackageDependency Name="Microsoft.VCLibs.140.00.Debug" MinVersion="14.0.25830.2" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
   </Dependencies>
   <Resources>
@@ -42,7 +42,7 @@
   <build:Metadata>
     <build:Item Name="TargetFrameworkMoniker" Value=".NETCore,Version=v5.0" />
     <build:Item Name="VisualStudio" Version="15.0" />
-    <build:Item Name="VisualStudioEdition" Value="Microsoft Visual Studio Community 2017" />
+    <build:Item Name="VisualStudioEdition" Value="Microsoft Visual Studio Enterprise 2017" />
     <build:Item Name="OperatingSystem" Version="10.0.16299.15 (WinBuild.160101.0800)" />
     <build:Item Name="Microsoft.Build.AppxPackage.dll" Version="15.0.27128.1" />
     <build:Item Name="ProjectGUID" Value="{2EC15016-A335-4E18-A016-A00DF33EF61C}" />

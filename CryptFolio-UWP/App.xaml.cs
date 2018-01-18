@@ -25,6 +25,7 @@ namespace CryptFolio
     {
         public static CoinMarketCapAPI apiObj { get; set; }
         public static List<TickerJSONResult> jsonList { get; set; }
+    
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -36,6 +37,12 @@ namespace CryptFolio
             this.Suspending += OnSuspending;
 
             apiObj = new CoinMarketCapAPI();
+
+            //
+            this.InitializeComponent();
+            this.Suspending += OnSuspending;
+            DataAccessLibrary.DataAccess.InitializeDatabase();
+
         }
 
         /// <summary>
