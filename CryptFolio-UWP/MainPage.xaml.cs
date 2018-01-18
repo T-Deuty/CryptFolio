@@ -274,22 +274,40 @@ namespace CryptFolio
             {
                 // Use args.QueryText to determine what to do.
                 var suggestionList = sender.ItemsSource as List<string>;
-                sender.Text = suggestionList[0];
-                selectedCurrency = suggestionList[0];
-                buttonAddAmount.IsEnabled = true;
+
+                // Error handling if user tries to enter text with no suggestionList
+                try
+                {
+                    sender.Text = suggestionList[0];
+                    selectedCurrency = suggestionList[0];
+                    buttonAddAmount.IsEnabled = true;
+                }
+
+                catch
+                {
+                    sender.Text = "";
+                }
             }
         }
 
         private void AmountOwnedBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (amountOwnedBox.Text != null && amountOwnedBox.Text != "")
+            // Error handling if user does not enter numeric input
+            try
             {
-                addedAmount = Convert.ToDouble(amountOwnedBox.Text);
+                if (amountOwnedBox.Text != null && amountOwnedBox.Text != "")
+                    addedAmount = Convert.ToDouble(amountOwnedBox.Text);
+
+                else
+                    addedAmount = 0.0;
             }
-            else
+
+            catch
             {
-                addedAmount = 0.0;
+                Console.WriteLine("Invalid input! Please enter numbers only");
+                amountOwnedBox.Text = "";
             }
+
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

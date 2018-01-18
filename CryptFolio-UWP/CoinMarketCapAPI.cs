@@ -89,7 +89,8 @@ namespace CryptFolio
 
         public async Task<List<TickerJSONResult>> RequestAllAsync()
         {
-            string downloadStr = url + "/";
+            // adding "?limit=1400" to pull info for 1400 coins from API
+            string downloadStr = url + "?limit=1400";
             Uri uri = new Uri(downloadStr);
             List<TickerJSONResult> list = null;
 
