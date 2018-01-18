@@ -180,15 +180,19 @@ namespace CryptFolio.CryptFolio_UWP_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[3];
+            _typeNameTable = new string[5];
             _typeNameTable[0] = "CryptFolio.MainPage";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
+            _typeNameTable[3] = "CryptFolio.ShadowBackdropControl";
+            _typeNameTable[4] = "CryptFolio.Splash";
 
-            _typeTable = new global::System.Type[3];
+            _typeTable = new global::System.Type[5];
             _typeTable[0] = typeof(global::CryptFolio.MainPage);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
+            _typeTable[3] = typeof(global::CryptFolio.ShadowBackdropControl);
+            _typeTable[4] = typeof(global::CryptFolio.Splash);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -224,6 +228,8 @@ namespace CryptFolio.CryptFolio_UWP_XamlTypeInfo
         }
 
         private object Activate_0_MainPage() { return new global::CryptFolio.MainPage(); }
+        private object Activate_3_ShadowBackdropControl() { return new global::CryptFolio.ShadowBackdropControl(); }
+        private object Activate_4_Splash() { return new global::CryptFolio.Splash(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -248,6 +254,20 @@ namespace CryptFolio.CryptFolio_UWP_XamlTypeInfo
 
             case 2:   //  Windows.UI.Xaml.Controls.UserControl
                 xamlType = new global::CryptFolio.CryptFolio_UWP_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 3:   //  CryptFolio.ShadowBackdropControl
+                userType = new global::CryptFolio.CryptFolio_UWP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.UserControl"));
+                userType.Activator = Activate_3_ShadowBackdropControl;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 4:   //  CryptFolio.Splash
+                userType = new global::CryptFolio.CryptFolio_UWP_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_4_Splash;
+                userType.SetIsLocalType();
+                xamlType = userType;
                 break;
             }
             return xamlType;
