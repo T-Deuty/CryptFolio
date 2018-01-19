@@ -25,6 +25,8 @@ bld/
 [Ll]og/
 bin\x64\Debug
 obj\x64\Debug
+bin/
+obj/
 
 # Visual Studio 2015 cache/options directory
 .vs/
