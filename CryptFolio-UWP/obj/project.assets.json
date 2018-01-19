@@ -316,6 +316,20 @@
         "runtime": {
           "lib/netstandard1.2/System.Data.Common.dll": {}
         }
+      },
+      "DataAccessLibrary/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0.10586",
+        "dependencies": {
+          "Microsoft.Data.SQLite": "1.1.1",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.6"
+        },
+        "compile": {
+          "bin/placeholder/DataAccessLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DataAccessLibrary.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0.16299/win10-arm": {
@@ -780,6 +794,20 @@
         },
         "runtime": {
           "lib/netstandard1.2/System.Data.Common.dll": {}
+        }
+      },
+      "DataAccessLibrary/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0.10586",
+        "dependencies": {
+          "Microsoft.Data.SQLite": "1.1.1",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.6"
+        },
+        "compile": {
+          "bin/placeholder/DataAccessLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DataAccessLibrary.dll": {}
         }
       }
     },
@@ -1247,6 +1275,20 @@
         "runtime": {
           "lib/netstandard1.2/System.Data.Common.dll": {}
         }
+      },
+      "DataAccessLibrary/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0.10586",
+        "dependencies": {
+          "Microsoft.Data.SQLite": "1.1.1",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.6"
+        },
+        "compile": {
+          "bin/placeholder/DataAccessLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DataAccessLibrary.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0.16299/win10-x64": {
@@ -1711,6 +1753,20 @@
         },
         "runtime": {
           "lib/netstandard1.2/System.Data.Common.dll": {}
+        }
+      },
+      "DataAccessLibrary/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0.10586",
+        "dependencies": {
+          "Microsoft.Data.SQLite": "1.1.1",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.6"
+        },
+        "compile": {
+          "bin/placeholder/DataAccessLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DataAccessLibrary.dll": {}
         }
       }
     },
@@ -2178,6 +2234,20 @@
         "runtime": {
           "lib/netstandard1.2/System.Data.Common.dll": {}
         }
+      },
+      "DataAccessLibrary/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0.10586",
+        "dependencies": {
+          "Microsoft.Data.SQLite": "1.1.1",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.6"
+        },
+        "compile": {
+          "bin/placeholder/DataAccessLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DataAccessLibrary.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0.16299/win10-x86": {
@@ -2642,6 +2712,20 @@
         },
         "runtime": {
           "lib/netstandard1.2/System.Data.Common.dll": {}
+        }
+      },
+      "DataAccessLibrary/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0.10586",
+        "dependencies": {
+          "Microsoft.Data.SQLite": "1.1.1",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.6"
+        },
+        "compile": {
+          "bin/placeholder/DataAccessLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DataAccessLibrary.dll": {}
         }
       }
     },
@@ -3108,6 +3192,20 @@
         },
         "runtime": {
           "lib/netstandard1.2/System.Data.Common.dll": {}
+        }
+      },
+      "DataAccessLibrary/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0.10586",
+        "dependencies": {
+          "Microsoft.Data.SQLite": "1.1.1",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.6"
+        },
+        "compile": {
+          "bin/placeholder/DataAccessLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DataAccessLibrary.dll": {}
         }
       }
     }
@@ -6689,10 +6787,16 @@
         "system.data.common.4.3.0.nupkg.sha512",
         "system.data.common.nuspec"
       ]
+    },
+    "DataAccessLibrary/1.0.0": {
+      "type": "project",
+      "path": "../DataAccessLibrary/DataAccessLibrary.csproj",
+      "msbuildProject": "../DataAccessLibrary/DataAccessLibrary.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "UAP,Version=v10.0.16299": [
+      "DataAccessLibrary >= 1.0.0",
       "Microsoft.Data.SQLite >= 1.1.1",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 6.0.6"
     ]
@@ -6729,7 +6833,11 @@
       },
       "frameworks": {
         "uap10.0.16299": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\bjbuc\\Source\\Repos\\CryptFolio\\DataAccessLibrary\\DataAccessLibrary.csproj": {
+              "projectPath": "C:\\Users\\bjbuc\\Source\\Repos\\CryptFolio\\DataAccessLibrary\\DataAccessLibrary.csproj"
+            }
+          }
         }
       }
     },

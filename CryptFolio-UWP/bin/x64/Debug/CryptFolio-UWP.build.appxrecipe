@@ -28,6 +28,9 @@
     <AppxPackagedFile Include="C:\Users\bjbuc\Source\Repos\CryptFolio\CryptFolio-UWP\bin\x64\Debug\CryptFolio.exe">
       <PackagePath>entrypoint\CryptFolio.exe</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\bjbuc\.nuget\packages\microsoft.data.sqlite\1.1.1\lib\netstandard1.3\Microsoft.Data.Sqlite.dll">
+      <PackagePath>Microsoft.Data.Sqlite.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\NuGetPackagesFallback\runtime.win10-x64.microsoft.netcore.universalwindowsplatform\6.0.6\runtimes\win10-x64\nativeassets\uap10.0.15138\clrcompression.dll">
       <PackagePath>clrcompression.dll</PackagePath>
     </AppxPackagedFile>
@@ -519,6 +522,12 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\NuGetPackagesFallback\runtime.win10-x64.microsoft.netcore.universalwindowsplatform\6.0.6\runtimes\win10-x64\lib\uap10.0.15138\netstandard.dll">
       <PackagePath>netstandard.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\bjbuc\.nuget\packages\sqlite\3.13.0\runtimes\win10-x64\nativeassets\uap10.0\sqlite3.dll">
+      <PackagePath>sqlite3.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\bjbuc\Source\Repos\CryptFolio\DataAccessLibrary\bin\x64\Debug\DataAccessLibrary.dll">
+      <PackagePath>DataAccessLibrary.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\bjbuc\Source\Repos\CryptFolio\CryptFolio-UWP\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>

@@ -741,3 +741,9 @@ C:\Users\bjbuc\Source\Repos\CryptFolio\CryptFolio-UWP\obj\x64\Debug\qualifiers.t
 C:\Users\bjbuc\Source\Repos\CryptFolio\CryptFolio-UWP\obj\x64\Debug\qualifiers.txt.intermediate
 C:\Users\bjbuc\Source\Repos\CryptFolio\CryptFolio-UWP\obj\x64\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\bjbuc\Source\Repos\CryptFolio\CryptFolio-UWP\obj\x64\Debug\ProjectArchitectures.txt
+C:\Users\bjbuc\Source\Repos\CryptFolio\CryptFolio-UWP\bin\x64\Debug\Microsoft.Data.Sqlite.dll
+C:\Users\bjbuc\Source\Repos\CryptFolio\CryptFolio-UWP\bin\x64\Debug\sqlite3.dll
+C:\Users\bjbuc\Source\Repos\CryptFolio\CryptFolio-UWP\bin\x64\Debug\DataAccessLibrary.dll
+C:\Users\bjbuc\Source\Repos\CryptFolio\CryptFolio-UWP\bin\x64\Debug\DataAccessLibrary.pdb
+C:\Users\bjbuc\Source\Repos\CryptFolio\CryptFolio-UWP\bin\x64\Debug\DataAccessLibrary.pri
+C:\Users\bjbuc\Source\Repos\CryptFolio\CryptFolio-UWP\obj\x64\Debug\Microsoft.Data.Sqlite\en-US\Microsoft.Data.Sqlite.Strings.resw
