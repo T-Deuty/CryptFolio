@@ -23,8 +23,8 @@ namespace CryptFolio
         public async Task<List<TickerJSONResult>> RequestAllAsync()
         {
             // adding "?limit=1400" to pull info for 1400 coins from API
-            string downloadStr = url + "?limit=1400";
-            Uri uri = new Uri(downloadStr);
+            //string downloadStr = url + "?limit=1400";
+            Uri uri = new Uri(url);
             List<TickerJSONResult> list = null;
 
             try
@@ -91,15 +91,12 @@ namespace CryptFolio
             }
         }
 
-        public List<TickerJSONResult> RetrieveJSONByTicker(string ticker)
+        public TickerJSONResult RetrieveJSONById(string id)
         {
-            if (App.jsonList != null)
-                return App.jsonList.Where(x => x.symbol == ticker).ToList();
-            else
-                return null;
+            return App.jsonList.Find(x => x.id == id);
         }
 
-        public List<TickerJSONResult> DeserializeJSON(string jsonStr, string ticker)
+        public List<TickerJSONResult> DeserializeJSON(string jsonStr, string id)
         {
             // store currency JSONs in this list
             List<TickerJSONResult> list = new List<TickerJSONResult>();
@@ -112,7 +109,9 @@ namespace CryptFolio
             }
             catch (Exception)
             {
-                return RetrieveJSONByTicker(ticker);
+                var returnList = new List<TickerJSONResult>();
+                returnList.Add(RetrieveJSONById(id));
+                return returnList;
             }
 
             string

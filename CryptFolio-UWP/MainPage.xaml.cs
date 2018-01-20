@@ -26,6 +26,8 @@ namespace CryptFolio
         {
             this.InitializeComponent();
             this.nameDictionary = App.apiObj.GetNameDictionary();
+
+
         }
         private void AddCurrenciesToMarketView()
         {
@@ -43,34 +45,38 @@ namespace CryptFolio
             const Int64 API_RECOMMENDED_LIMIT = 6;
 
             // timeSinceLastUpdated calculated here
-
-            var currentTime = DateTimeOffset.Now.ToUnixTimeSeconds();
-
-            string selectedItem = selectedCurrency;
-            string ticker = nameDictionary[selectedItem];
-
-            // get result from list if it exists
-            var timeSinceLastUpdated = API_RECOMMENDED_LIMIT + 1; // initialize to higher than API limit
-            result = App.apiObj.RetrieveJSONByTicker(ticker)[0];
-
-            if (App.jsonList != null && result != null)
+            try
             {
-                timeSinceLastUpdated = currentTime - Convert.ToInt64(result.last_updated);
+                var currentTime = DateTimeOffset.Now.ToUnixTimeSeconds();
+                string selectedItem = selectedCurrency;
+                string id = nameDictionary[selectedItem];
+
+                // get result from list if it exists
+                var timeSinceLastUpdated = API_RECOMMENDED_LIMIT + 1; // initialize to higher than API limit
+                result = App.apiObj.RetrieveJSONById(id);
+
+                if (App.jsonList != null && result != null)
+                    timeSinceLastUpdated = currentTime - Convert.ToInt64(result.last_updated);
+
+                if (timeSinceLastUpdated > API_RECOMMENDED_LIMIT)
+                {
+                    var fireAndForget = GetSingleCurrencyDataAndDisplay(id, selectedItem, currentTime.ToString());
+                    // TODO add error handler
+                }
+                else
+                {
+                    DisplayCurrencyStats(id, selectedItem);
+                }
             }
-
-            if ( timeSinceLastUpdated > API_RECOMMENDED_LIMIT)
+            catch (Exception ex)
             {
-                var fireAndForget = GetSingleCurrencyDataAndDisplay(ticker, selectedItem);
-                // TODO add error handler
-            } else
-            {
-                DisplayCurrencyStats(ticker, selectedItem);
-            }
+                Console.WriteLine(ex.Message);
+            }            
         }
 
-        private Task GetSingleCurrencyDataAndDisplay(string ticker, string selectedItem)
+        private Task GetSingleCurrencyDataAndDisplay(string id, string selectedItem, string currentTime)
         {
-            var task = App.apiObj.RequestTickerAsync(ticker);
+            var task = App.apiObj.RequestTickerAsync(id);
             task.ContinueWith((a) =>
             {
                var u = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
@@ -79,12 +85,13 @@ namespace CryptFolio
 
                    if (result != null)
                    {
-                       DisplayCurrencyStats(ticker, selectedItem);
+                       // update last_updated value of the currency
+                       var index = App.jsonList.FindIndex(x => x.id == id);
+                       App.jsonList[index].last_updated = currentTime;
+                       DisplayCurrencyStats(id, selectedItem);
                    }
                    else
-                   {
                        DisplayAPIError();
-                   }
                });
             });
             return task;
