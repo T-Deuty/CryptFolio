@@ -40,19 +40,36 @@ namespace CryptFolio
         // BUTTON CLICK HANDLER
         private void ButtonAddAmount_Click(object sender, RoutedEventArgs e)
         {
-            var fireAndForget = GetSingleCurrencyDataAndDisplay();
-            // TODO add error handler
-        }
+            // --- only send API request if not called within last API_RECOMMENDED_TIME seconds ---
+            const Int64 API_RECOMMENDED_LIMIT = 6;
 
-        private Task GetSingleCurrencyDataAndDisplay()
-        {
+            // timeSinceLastUpdated calculated here
+            var currentTime = DateTimeOffset.Now.ToUnixTimeSeconds();
+            var timeSinceLastUpdated = API_RECOMMENDED_LIMIT + 1; // initialize to higher than API limit
+            if (App.jsonList != null)
+            {
+                timeSinceLastUpdated = currentTime - Convert.ToInt64(App.jsonList[0].last_updated);
+            }
+
             string selectedItem = selectedCurrency;
             string ticker = nameDictionary[selectedItem];
 
+            if ( timeSinceLastUpdated > API_RECOMMENDED_LIMIT)
+            {
+                var fireAndForget = GetSingleCurrencyDataAndDisplay(ticker, selectedItem);
+                // TODO add error handler
+            } else
+            {
+                DisplayCurrencyStats(ticker, selectedItem);
+            }
+        }
+
+        private Task GetSingleCurrencyDataAndDisplay(string ticker, string selectedItem)
+        {
             var task = App.apiObj.RequestTickerAsync(ticker);
             task.ContinueWith((a) =>
             {
-                var u = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+               var u = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                {
                    this.result = a.Result;
 
