@@ -18,7 +18,6 @@ namespace CryptFolio
     public sealed partial class MainPage : Page
     {
         private Dictionary<string, string> nameDictionary;
-        //private CoinMarketCapAPI apiObj;
         private string selectedCurrency;
         private double addedAmount, totalInvestmentValue;
         private TickerJSONResult result;
@@ -44,15 +43,20 @@ namespace CryptFolio
             const Int64 API_RECOMMENDED_LIMIT = 6;
 
             // timeSinceLastUpdated calculated here
+
             var currentTime = DateTimeOffset.Now.ToUnixTimeSeconds();
-            var timeSinceLastUpdated = API_RECOMMENDED_LIMIT + 1; // initialize to higher than API limit
-            if (App.jsonList != null)
-            {
-                timeSinceLastUpdated = currentTime - Convert.ToInt64(App.jsonList[0].last_updated);
-            }
 
             string selectedItem = selectedCurrency;
             string ticker = nameDictionary[selectedItem];
+
+            // get result from list if it exists
+            var timeSinceLastUpdated = API_RECOMMENDED_LIMIT + 1; // initialize to higher than API limit
+            result = App.apiObj.RetrieveJSONByTicker(ticker)[0];
+
+            if (App.jsonList != null && result != null)
+            {
+                timeSinceLastUpdated = currentTime - Convert.ToInt64(result.last_updated);
+            }
 
             if ( timeSinceLastUpdated > API_RECOMMENDED_LIMIT)
             {
@@ -71,9 +75,9 @@ namespace CryptFolio
             {
                var u = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                {
-                   this.result = a.Result;
+                   result = a.Result;
 
-                   if (this.result != null)
+                   if (result != null)
                    {
                        DisplayCurrencyStats(ticker, selectedItem);
                    }

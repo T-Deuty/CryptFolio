@@ -93,9 +93,10 @@ namespace CryptFolio
 
         public List<TickerJSONResult> RetrieveJSONByTicker(string ticker)
         {
-            var returnList = App.jsonList.Where(x => x.symbol == ticker).ToList();
-
-            return returnList;
+            if (App.jsonList != null)
+                return App.jsonList.Where(x => x.symbol == ticker).ToList();
+            else
+                return null;
         }
 
         public List<TickerJSONResult> DeserializeJSON(string jsonStr, string ticker)
