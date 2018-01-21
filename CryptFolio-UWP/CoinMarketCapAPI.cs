@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Web.Http;
 using Windows.Data.Json;
+using Windows.Foundation;
 
 namespace CryptFolio
 {
@@ -12,16 +13,16 @@ namespace CryptFolio
     {
         protected Dictionary<string, string> nameDictionary;
 
+        internal delegate AsyncOperationWithProgressCompletedHandler<Windows.Web.Http.HttpResponseMessage, HttpProgress> progressHandler();
+
         private const string url = "https://api.coinmarketcap.com/v1/ticker/";
         private HttpClient client;
 
-        public CoinMarketCapAPI()
-        {
-            client = new HttpClient();
-        }
+        public CoinMarketCapAPI() { }
 
         public async Task<List<TickerJSONResult>> RequestAllAsync()
         {
+            client = new HttpClient();
             // adding "?limit=1400" to pull info for 1400 coins from API
             //string downloadStr = url + "?limit=1400";
             Uri uri = new Uri(url);
@@ -31,6 +32,11 @@ namespace CryptFolio
             {
                 var downloadTask = client.GetAsync(uri, HttpCompletionOption.ResponseContentRead);
                 HttpResponseMessage response = await downloadTask;
+
+                downloadTask.Progress = (result, progress) =>
+                {
+                    Splash.HandleProgress(progress);
+                };
 
                 response.EnsureSuccessStatusCode();
 
@@ -42,23 +48,27 @@ namespace CryptFolio
                 // build dictionary out of the list
                 BuildNameDictionary(list);
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex)    
+                {
                 string message = ex.Message;
             }
 
+            client.Dispose();
+
             if (list != null && list.Count > 0)
-            {
                 return list;
-            }
             else
-            {
                 return null;
-            }
+        }
+
+        private void DownloadProgressChanged(object sender, EventArgs args)
+        {
+
         }
 
         public async Task<TickerJSONResult> RequestTickerAsync(string ticker)
         {
+            client = new HttpClient();
             string downloadStr = url + ticker + "/";
             Uri uri = new Uri(downloadStr);
             List<TickerJSONResult> list = null;
@@ -80,6 +90,8 @@ namespace CryptFolio
             {
                 string message = ex.Message;
             }
+
+            client.Dispose();
 
             if (list != null && list.Count > 0)
             {

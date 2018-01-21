@@ -94,7 +94,6 @@ namespace CryptFolio
                 {
                     rootFrame = new Frame
                     {
-                        //Content = new MainPage()
                         Content = new MainPage()
                     };
                     Window.Current.Content = rootFrame;
