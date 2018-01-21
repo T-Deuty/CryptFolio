@@ -22,16 +22,11 @@ namespace CryptFolio
     /// </summary>
     public sealed partial class Splash : Page
     {
-        internal Frame rootFrame;
+        //internal Frame rootFrame;
 
         public Splash()
         {
             this.InitializeComponent();
-        }
-
-        public async void DismissSplash()
-        {
-            
         }
     }
 }

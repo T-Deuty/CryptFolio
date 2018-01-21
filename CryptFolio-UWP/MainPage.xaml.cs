@@ -18,7 +18,6 @@ namespace CryptFolio
     public sealed partial class MainPage : Page
     {
         private Dictionary<string, string> nameDictionary;
-        //private CoinMarketCapAPI apiObj;
         private string selectedCurrency;
         private double addedAmount, totalInvestmentValue;
         private TickerJSONResult result;
@@ -27,6 +26,8 @@ namespace CryptFolio
         {
             this.InitializeComponent();
             this.nameDictionary = App.apiObj.GetNameDictionary();
+
+
         }
         private void AddCurrenciesToMarketView()
         {
@@ -40,30 +41,57 @@ namespace CryptFolio
         // BUTTON CLICK HANDLER
         private void ButtonAddAmount_Click(object sender, RoutedEventArgs e)
         {
-            var fireAndForget = GetSingleCurrencyDataAndDisplay();
-            // TODO add error handler
+            // --- only send API request if not called within last API_RECOMMENDED_TIME seconds ---
+            const Int64 API_RECOMMENDED_LIMIT = 6;
+
+            // timeSinceLastUpdated calculated here
+            try
+            {
+                var currentTime = DateTimeOffset.Now.ToUnixTimeSeconds();
+                string selectedItem = selectedCurrency;
+                string id = nameDictionary[selectedItem];
+
+                // get result from list if it exists
+                var timeSinceLastUpdated = API_RECOMMENDED_LIMIT + 1; // initialize to higher than API limit
+                result = App.apiObj.RetrieveJSONById(id);
+
+                if (App.jsonList != null && result != null)
+                    timeSinceLastUpdated = currentTime - Convert.ToInt64(result.last_updated);
+
+                if (timeSinceLastUpdated > API_RECOMMENDED_LIMIT)
+                {
+                    var fireAndForget = GetSingleCurrencyDataAndDisplay(id, selectedItem, currentTime.ToString());
+                    // TODO add error handler
+                }
+                else
+                {
+                    DisplayCurrencyStats(id, selectedItem);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }            
         }
 
-        private Task GetSingleCurrencyDataAndDisplay()
+        private Task GetSingleCurrencyDataAndDisplay(string id, string selectedItem, string currentTime)
         {
-            string selectedItem = selectedCurrency;
-            string ticker = nameDictionary[selectedItem];
-
-            var task = App.apiObj.RequestTickerAsync(ticker);
+            var task = App.apiObj.RequestTickerAsync(id);
             task.ContinueWith((a) =>
             {
-                var u = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+               var u = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                {
-                   this.result = a.Result;
+                   result = a.Result;
 
-                   if (this.result != null)
+                   if (result != null)
                    {
-                       DisplayCurrencyStats(ticker, selectedItem);
+                       // update last_updated value of the currency
+                       var index = App.jsonList.FindIndex(x => x.id == id);
+                       App.jsonList[index].last_updated = currentTime;
+                       DisplayCurrencyStats(id, selectedItem);
                    }
                    else
-                   {
                        DisplayAPIError();
-                   }
                });
             });
             return task;
