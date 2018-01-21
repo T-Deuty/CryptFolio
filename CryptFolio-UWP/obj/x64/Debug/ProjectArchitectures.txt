@@ -1,2 +1,0 @@
-C:\Users\bjbuc\Source\Repos\CryptFolio\CryptFolio-UWP\CryptFolio-UWP.csproj;x64
-C:\Users\bjbuc\Source\Repos\CryptFolio\DataAccessLibrary\DataAccessLibrary.csproj;x64
