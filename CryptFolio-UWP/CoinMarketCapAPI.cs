@@ -49,7 +49,7 @@ namespace CryptFolio
                 BuildNameDictionary(list);
             }
             catch (Exception ex)    
-                {
+            {
                 string message = ex.Message;
             }
 
