@@ -1,19 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace CryptFolio
@@ -71,7 +62,7 @@ namespace CryptFolio
                     //TODO: Load state from previously suspended application
                 }
 
-                var getAllTask = GetAllCurrencyData(rootFrame, e);
+                //var getAllTask = GetAllCurrencyData(rootFrame, e);
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
@@ -84,32 +75,11 @@ namespace CryptFolio
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    //rootFrame.Navigate(typeof(MainPage), e.Arguments);
                     rootFrame.Navigate(typeof(Splash), e.Arguments);
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
-        }
-
-        private Task GetAllCurrencyData(Frame rootFrame, LaunchActivatedEventArgs e)
-        {
-            var task = apiObj.RequestAllAsync();
-            task.ContinueWith(async (a) =>
-            {
-                jsonList = a.Result;
-
-                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-                {
-                    rootFrame = new Frame
-                    {
-                        //Content = new MainPage()
-                        Content = new MainPage()
-                    };
-                    Window.Current.Content = rootFrame;
-                });
-            });
-            return task;
         }
 
         /// <summary>
