@@ -75,7 +75,6 @@ namespace CryptFolio
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    //rootFrame.Navigate(typeof(MainPage), e.Arguments);
                     rootFrame.Navigate(typeof(Splash), e.Arguments);
                 }
                 // Ensure the current window is active
@@ -85,12 +84,14 @@ namespace CryptFolio
 
         private Task GetAllCurrencyData(Frame rootFrame, LaunchActivatedEventArgs e)
         {
-            var task = apiObj.RequestAllAsync();
+            //var task = apiObj.RequestAllAsync();
+            var task = 
             task.ContinueWith(async (a) =>
             {
                 jsonList = a.Result;
 
-                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                //await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                await Task.Run(() =>
                 {
                     rootFrame = new Frame
                     {

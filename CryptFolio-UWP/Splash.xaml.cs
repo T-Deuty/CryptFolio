@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
 using Windows.Web.Http;
@@ -16,17 +17,21 @@ namespace CryptFolio
     {
         //internal Frame rootFrame;
 
-        public Splash() => this.InitializeComponent();
-
-        public void test()
+        public Splash()
         {
-            
+            this.InitializeComponent();
+            GetAllCurrencyData()
+        }
+
+        private Task GetAllCurrencyData(CoinMarketCapAPI apiObj)
+        {
+            return apiObj.RequestAllAsync(this);
         }
 
         //delegate method
-        internal static void HandleProgress(HttpProgress progress)
+        internal void HandleProgress(HttpProgress progress)
         {
-            
+            DownloadProgressBar.Value = (double)progress.BytesReceived / (double)progress.TotalBytesToReceive;
         }
     }
 }

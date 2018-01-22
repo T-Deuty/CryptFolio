@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Web.Http;
 using Windows.Data.Json;
 using Windows.Foundation;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace CryptFolio
 {
@@ -20,23 +21,25 @@ namespace CryptFolio
 
         public CoinMarketCapAPI() { }
 
-        public async Task<List<TickerJSONResult>> RequestAllAsync()
+        public async Task<List<TickerJSONResult>> RequestAllAsync(Page callingPage)
         {
             client = new HttpClient();
             // adding "?limit=1400" to pull info for 1400 coins from API
-            //string downloadStr = url + "?limit=1400";
-            Uri uri = new Uri(url);
+            string downloadStr = url + "?limit=1400";
+            Uri uri = new Uri(downloadStr);
             List<TickerJSONResult> list = null;
 
             try
             {
                 var downloadTask = client.GetAsync(uri, HttpCompletionOption.ResponseContentRead);
-                HttpResponseMessage response = await downloadTask;
+                var splashPage = Window.Current.Content as Splash;
 
                 downloadTask.Progress = (result, progress) =>
                 {
-                    Splash.HandleProgress(progress);
+                    Console.WriteLine(progress.BytesReceived);
+                    splashPage.HandleProgress(progress);
                 };
+                HttpResponseMessage response = await downloadTask;
 
                 response.EnsureSuccessStatusCode();
 
