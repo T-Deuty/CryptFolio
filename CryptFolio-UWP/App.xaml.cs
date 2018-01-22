@@ -62,7 +62,7 @@ namespace CryptFolio
                     //TODO: Load state from previously suspended application
                 }
 
-                var getAllTask = GetAllCurrencyData(rootFrame, e);
+                //var getAllTask = GetAllCurrencyData(rootFrame, e);
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
@@ -80,27 +80,6 @@ namespace CryptFolio
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
-        }
-
-        private Task GetAllCurrencyData(Frame rootFrame, LaunchActivatedEventArgs e)
-        {
-            //var task = apiObj.RequestAllAsync();
-            var task = 
-            task.ContinueWith(async (a) =>
-            {
-                jsonList = a.Result;
-
-                //await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-                await Task.Run(() =>
-                {
-                    rootFrame = new Frame
-                    {
-                        Content = new MainPage()
-                    };
-                    Window.Current.Content = rootFrame;
-                });
-            });
-            return task;
         }
 
         /// <summary>

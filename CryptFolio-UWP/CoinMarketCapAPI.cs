@@ -21,7 +21,7 @@ namespace CryptFolio
 
         public CoinMarketCapAPI() { }
 
-        public async Task<List<TickerJSONResult>> RequestAllAsync(Page callingPage)
+        public async Task<List<TickerJSONResult>> RequestAllAsync(Splash splashPage)
         {
             client = new HttpClient();
             // adding "?limit=1400" to pull info for 1400 coins from API
@@ -32,12 +32,11 @@ namespace CryptFolio
             try
             {
                 var downloadTask = client.GetAsync(uri, HttpCompletionOption.ResponseContentRead);
-                var splashPage = Window.Current.Content as Splash;
 
                 downloadTask.Progress = (result, progress) =>
                 {
                     Console.WriteLine(progress.BytesReceived);
-                    splashPage.HandleProgress(progress);
+                    splashPage.HandleProgressAsync(progress);
                 };
                 HttpResponseMessage response = await downloadTask;
 
@@ -62,11 +61,6 @@ namespace CryptFolio
                 return list;
             else
                 return null;
-        }
-
-        private void DownloadProgressChanged(object sender, EventArgs args)
-        {
-
         }
 
         public async Task<TickerJSONResult> RequestTickerAsync(string ticker)

@@ -3,7 +3,9 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Windows.Foundation;
+using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 using Windows.Web.Http;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -16,22 +18,66 @@ namespace CryptFolio
     public partial class Splash : Page
     {
         //internal Frame rootFrame;
+        const double totalBytesToReceive = 800000;
+        int bytesReceived = 0;
 
-        public Splash()
+        public Splash() => InitializeComponent();
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.InitializeComponent();
-            GetAllCurrencyData()
+            var getAllTask = GetAllCurrencyData();
+            base.OnNavigatedTo(e);
         }
 
-        private Task GetAllCurrencyData(CoinMarketCapAPI apiObj)
+        private Task GetAllCurrencyData()
         {
-            return apiObj.RequestAllAsync(this);
+            var task = App.apiObj.RequestAllAsync(this);
+
+            task.ContinueWith(async (a) =>
+            {
+                App.jsonList = a.Result;
+
+                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                {
+                    this.Frame.Navigate(typeof(MainPage));
+                });
+            });
+            return task;
         }
 
-        //delegate method
-        internal void HandleProgress(HttpProgress progress)
+        internal async void HandleProgressAsync(HttpProgress progress)
         {
-            DownloadProgressBar.Value = (double)progress.BytesReceived / (double)progress.TotalBytesToReceive;
+            if (progress.BytesReceived > 0)
+            {
+                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                () =>
+                {
+                    bytesReceived += (int)progress.BytesReceived;
+                    var prog = ((double)progress.BytesReceived / totalBytesToReceive) * 100;
+                    DownloadProgressBar.Value = prog;
+                }
+                );
+            }
         }
+
+        //private Task GetAllCurrencyData()
+        //{
+        //    var task = App.apiObj.RequestAllAsync();
+
+        //    task.ContinueWith(async (a) =>
+        //    {
+        //        jsonList = a.Result;
+
+        //        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+        //        {
+        //            rootFrame = new Frame
+        //            {
+        //                Content = new MainPage()
+        //            };
+        //            Window.Current.Content = rootFrame;
+        //        });
+        //    });
+        //    return task;
+        //}
     }
 }
