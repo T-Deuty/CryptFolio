@@ -33,10 +33,6 @@ namespace CryptFolio
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             DataAccessLibrary.DataAccess.InitializeDatabase();
-
-            //debugging 
-            //List<DataAccessLibrary.DataAccess.CoinInfoClass> checkCoins = DataAccessLibrary.DataAccess.GetDataEntries();
-            //Console.WriteLine(checkCoins);
         }
 
         /// <summary>
