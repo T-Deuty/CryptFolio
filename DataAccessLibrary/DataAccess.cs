@@ -14,6 +14,7 @@ namespace DataAccessLibrary
         public class CoinInfoClass
         {
             public string theCoinsName;
+            public string theCoinsFullName;
             public double theCoinsAmount;
         }
 
@@ -24,9 +25,11 @@ namespace DataAccessLibrary
             new SqliteConnection("Filename=CryptFolio_Database.db"))
             {
                 db.Open();
-    
+                
+
                 String tableCommand = "CREATE TABLE IF NOT " +
-                    "EXISTS Portfolio (CoinName VARCHAR(50) PRIMARY KEY, " +
+                    "EXISTS Portfolio_Main (CoinName VARCHAR(50) PRIMARY KEY, " +
+                    "FullCoinName VARCHAR(50) NOT NULL, " +
                     "AmountOwned DOUBLE(50,25) NOT NULL)";
 
                 SqliteCommand createTable = new SqliteCommand(tableCommand, db);
@@ -36,7 +39,7 @@ namespace DataAccessLibrary
         }
 
         //Adds entries into the database
-        public static void AddDataEntries(string nameOfCoin, double amountOfCoin)
+        public static void AddDataEntries(string nameOfCoin, string fullNameOfCoin, double amountOfCoin)
         {
             using (SqliteConnection db =
                 new SqliteConnection("Filename=CryptFolio_Database.db"))
@@ -44,7 +47,7 @@ namespace DataAccessLibrary
                 db.Open();
 
                 //Check if already in the database. If it is already an entry update Amount Owned. Else add a new coin and amount owned 
-                SqliteCommand selectCommand = new SqliteCommand ("SELECT CoinName from Portfolio", db);
+                SqliteCommand selectCommand = new SqliteCommand ("SELECT CoinName from Portfolio_Main", db);
                 SqliteDataReader queryCoinName = selectCommand.ExecuteReader();
                 bool alreadyInList = false;
                 while (queryCoinName.Read())
@@ -54,25 +57,26 @@ namespace DataAccessLibrary
                         alreadyInList = true;
                         break;
                     }
-                        
                 }
-
+                
                 if (alreadyInList == false)         //Not in list, add new entry
                 {
                     SqliteCommand insertCommand = new SqliteCommand();
                     insertCommand.Connection = db;
 
                     // Use parameterized query to prevent SQL injection attacks
-                    insertCommand.CommandText = "INSERT INTO Portfolio (CoinName, AmountOwned) VALUES (@Val1, @Val2);";
+                    insertCommand.CommandText = "INSERT INTO Portfolio_Main (CoinName, FullCoinName, AmountOwned) VALUES (@Val1, @Val2, @Val3);";
                     insertCommand.Parameters.AddWithValue("@Val1", nameOfCoin);
-                    insertCommand.Parameters.AddWithValue("@Val2", amountOfCoin);
+                    insertCommand.Parameters.AddWithValue("@Val2", fullNameOfCoin);
+                    insertCommand.Parameters.AddWithValue("@Val3", amountOfCoin);
                     insertCommand.ExecuteNonQuery();
+                    
                 }
                 else                            //In list update Entry
                 {
                     SqliteCommand updateCommand = new SqliteCommand();
                     updateCommand.Connection = db;
-                    updateCommand.CommandText = "UPDATE Portfolio SET AmountOwned = @Val1 WHERE CoinName = @Val2;";
+                    updateCommand.CommandText = "UPDATE Portfolio_Main SET AmountOwned = @Val1 WHERE CoinName = @Val2;";
                     updateCommand.Parameters.AddWithValue("@Val1", amountOfCoin);
                     updateCommand.Parameters.AddWithValue("@Val2", nameOfCoin);
                     updateCommand.ExecuteNonQuery();
@@ -93,16 +97,19 @@ namespace DataAccessLibrary
             {
                 db.Open();
                 //Gets all coin names
-                SqliteCommand selectStringCommand = new SqliteCommand("SELECT CoinName FROM Portfolio", db);
+                SqliteCommand selectStringCommand = new SqliteCommand("SELECT CoinName FROM Portfolio_Main ORDER BY CoinName ASC", db);
                 SqliteDataReader stringQuery = selectStringCommand.ExecuteReader();
                 //Gets all coin amounts
-                SqliteCommand selectNumCommand = new SqliteCommand("SELECT AmountOwned from Portfolio", db);
+                SqliteCommand selectFullStringCommand = new SqliteCommand("SELECT FullCoinName from Portfolio_Main ORDER BY CoinName ASC", db);
+                SqliteDataReader fullStringQuery = selectFullStringCommand.ExecuteReader();
+                //Gets all coin amounts
+                SqliteCommand selectNumCommand = new SqliteCommand("SELECT AmountOwned from Portfolio_Main ORDER BY CoinName ASC", db);
                 SqliteDataReader numQuery = selectNumCommand.ExecuteReader();
 
-                while (stringQuery.Read() && numQuery.Read())
+                while (stringQuery.Read() && fullStringQuery.Read() && numQuery.Read())
                 {
                     //Add coin name and coin amount to each item in List
-                   listOfCoins.Add(new CoinInfoClass { theCoinsName = stringQuery.GetString(0), theCoinsAmount = numQuery.GetDouble(0)});
+                   listOfCoins.Add(new CoinInfoClass { theCoinsName = stringQuery.GetString(0), theCoinsFullName = fullStringQuery.GetString(0), theCoinsAmount = numQuery.GetDouble(0)});
                 }
 
                 db.Close();
@@ -122,7 +129,7 @@ namespace DataAccessLibrary
                 SqliteCommand deleteCommand = new SqliteCommand();
                 deleteCommand.Connection = db;
                 // Use parameterized query to prevent SQL injection attacks
-                deleteCommand.CommandText = "DELETE FROM Portfolio WHERE CoinName = @Val;";
+                deleteCommand.CommandText = "DELETE FROM Portfolio_Main WHERE CoinName = @Val;";
                 deleteCommand.Parameters.AddWithValue("@Val", coinToDelete);
                 deleteCommand.ExecuteNonQuery();
 
