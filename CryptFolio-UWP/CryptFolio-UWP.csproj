@@ -98,6 +98,7 @@
     <Compile Include="Helper Classes\CoinMarketCapAPI.cs" />
     <Compile Include="Helper Classes\CurrencyStackPanelBuilder.cs" />
     <Compile Include="Helper Classes\CustomStackPanel.cs" />
+    <Compile Include="Helper Classes\UIHelperClass.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
