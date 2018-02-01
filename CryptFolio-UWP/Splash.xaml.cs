@@ -59,25 +59,5 @@ namespace CryptFolio
                 );
             }
         }
-
-        //private Task GetAllCurrencyData()
-        //{
-        //    var task = App.apiObj.RequestAllAsync();
-
-        //    task.ContinueWith(async (a) =>
-        //    {
-        //        jsonList = a.Result;
-
-        //        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-        //        {
-        //            rootFrame = new Frame
-        //            {
-        //                Content = new MainPage()
-        //            };
-        //            Window.Current.Content = rootFrame;
-        //        });
-        //    });
-        //    return task;
-        //}
     }
 }
