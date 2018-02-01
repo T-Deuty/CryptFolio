@@ -8,6 +8,7 @@
     mc:Ignorable="d">
 
 	<Grid Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}">
-		<ProgressBar x:Name="DownloadProgressBar" Height="auto" Width="1000" Foreground="Blue" Value="0" Maximum="100" Margin="0,12"></ProgressBar>
+		<!--<ProgressBar x:Name="DownloadProgressBar" Height="auto" Width="1000" Foreground="Blue" Value="0" Maximum="100" Margin="0,12"></ProgressBar>-->
+		<ProgressRing x:Name="DownloadProgressRing" Foreground="DarkBlue" Width="150" Height="150"></ProgressRing>
 	</Grid>
 </Page>

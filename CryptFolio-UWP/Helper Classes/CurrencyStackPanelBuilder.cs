@@ -85,8 +85,12 @@ namespace CryptFolio
             outsideGrid.Children.Add(subPanel);
             Grid.SetColumn(subPanel, 3);
 
-            AcrylicBrush brush = new AcrylicBrush();
-            brush.TintColor = Colors.LightGray;
+            AcrylicBrush brush = new AcrylicBrush
+            {
+                TintColor = Colors.DarkBlue,
+                TintOpacity = 0.7,
+                Opacity = 0.2
+            };
             outsideGrid.Background = brush;
             outsideGrid.CornerRadius = new CornerRadius(10);
 
