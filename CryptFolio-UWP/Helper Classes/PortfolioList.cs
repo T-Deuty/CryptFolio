@@ -4,6 +4,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Text;
 using Windows.UI.Xaml.Media;
 using Windows.UI;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace CryptFolio
 {
@@ -108,6 +109,7 @@ namespace CryptFolio
                 stackPanelToUpdate.Children.Add(userUSDValueLabel);
 
                 stackPanelRight.Children.Add(stackPanelToUpdate);
+                
             }
             else
             {
@@ -124,6 +126,19 @@ namespace CryptFolio
                 userAmountLabel = GetChildOfStackPanel(stackPanelToUpdate, labelUserAmountStr) as TextBlock;
                 userAmountLabel.Text = labelUserAmountContentStr + addedAmount.ToString();
             }
+
+            PopInThemeAnimation popInAnimation = new PopInThemeAnimation
+            {
+                Duration = new Duration(TimeSpan.FromSeconds(1)),
+                FromHorizontalOffset = 300,
+                TargetName = stackPanelToUpdate.Name
+            };
+
+            Storyboard.SetTarget(popInAnimation, stackPanelToUpdate);
+
+            Storyboard popInAnimationStoryboard = new Storyboard();
+            popInAnimationStoryboard.Children.Add(popInAnimation);
+            popInAnimationStoryboard.Begin();
 
             // update total values
             //UpdateTotalValue();
