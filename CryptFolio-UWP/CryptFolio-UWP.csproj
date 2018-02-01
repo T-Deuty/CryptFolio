@@ -95,18 +95,18 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CoinMarketCapAPI.cs" />
-    <Compile Include="CurrencyStackPanelBuilder.cs" />
-    <Compile Include="CustomStackPanel.cs" />
+    <Compile Include="Helper Classes\CoinMarketCapAPI.cs" />
+    <Compile Include="Helper Classes\CurrencyStackPanelBuilder.cs" />
+    <Compile Include="Helper Classes\CustomStackPanel.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PortfolioList.cs" />
+    <Compile Include="Helper Classes\PortfolioList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Splash.xaml.cs">
       <DependentUpon>Splash.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TickerJSONResult.cs" />
+    <Compile Include="Helper Classes\TickerJSONResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
