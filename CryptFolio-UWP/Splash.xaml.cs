@@ -18,8 +18,8 @@ namespace CryptFolio
     public partial class Splash : Page
     {
         //internal Frame rootFrame;
-        const double totalBytesToReceive = 800000;
-        int bytesReceived = 0;
+        //const double totalBytesToReceive = 800000;
+        //int bytesReceived = 0;
 
         public Splash() => InitializeComponent();
 
@@ -27,6 +27,7 @@ namespace CryptFolio
         {
             var getAllTask = GetAllCurrencyData();
             base.OnNavigatedTo(e);
+            DownloadProgressRing.IsActive = true;
         }
 
         private Task GetAllCurrencyData()
@@ -39,25 +40,26 @@ namespace CryptFolio
 
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                 {
+                    DownloadProgressRing.IsActive = false;
                     this.Frame.Navigate(typeof(MainPage));
                 });
             });
             return task;
         }
 
-        internal async void HandleProgressAsync(HttpProgress progress)
-        {
-            if (progress.BytesReceived > 0)
-            {
-                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                () =>
-                {
-                    bytesReceived += (int)progress.BytesReceived;
-                    var prog = ((double)progress.BytesReceived / totalBytesToReceive) * 100;
-                    DownloadProgressBar.Value = prog;
-                }
-                );
-            }
-        }
+        //internal async void HandleProgressAsync(HttpProgress progress)
+        //{
+        //    if (progress.BytesReceived > 0)
+        //    {
+        //        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+        //        () =>
+        //        {
+        //            bytesReceived += (int)progress.BytesReceived;
+        //            var prog = ((double)progress.BytesReceived / totalBytesToReceive) * 100;
+        //            DownloadProgressBar.Value = prog;
+        //        }
+        //        );
+        //    }
+        //}
     }
 }

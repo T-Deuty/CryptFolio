@@ -33,11 +33,11 @@ namespace CryptFolio
             {
                 var downloadTask = client.GetAsync(uri, HttpCompletionOption.ResponseContentRead);
 
-                downloadTask.Progress = (result, progress) =>
-                {
-                    Console.WriteLine(progress.BytesReceived);
-                    splashPage.HandleProgressAsync(progress);
-                };
+                //downloadTask.Progress = (result, progress) =>
+                //{
+                //    Console.WriteLine(progress.BytesReceived);
+                //    splashPage.HandleProgressAsync(progress);
+                //};
                 HttpResponseMessage response = await downloadTask;
 
                 response.EnsureSuccessStatusCode();

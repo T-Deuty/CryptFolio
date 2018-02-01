@@ -60,7 +60,7 @@ namespace CryptFolio
                 }
                 else
                 {
-                    portfolioList.DisplayCurrencyStats(id, selectedItem, ref stackPanelRight);
+                    portfolioList.DisplayCurrencyStats(id, selectedItem, ref stackPanelRight, ref PortfolioListScrollViewer);
                     UpdateTotalValue();
                 }
             }
@@ -84,7 +84,7 @@ namespace CryptFolio
                        // update last_updated value of the currency
                        var index = App.jsonList.FindIndex(x => x.id == id);
                        App.jsonList[index].last_updated = currentTime;
-                       portfolioList.DisplayCurrencyStats(id, selectedItem, ref stackPanelRight);
+                       portfolioList.DisplayCurrencyStats(id, selectedItem, ref stackPanelRight, ref PortfolioListScrollViewer);
                        UpdateTotalValue();
                    }
                    else

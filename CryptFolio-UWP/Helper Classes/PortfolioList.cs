@@ -4,6 +4,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Text;
 using Windows.UI.Xaml.Media;
 using Windows.UI;
+using Windows.UI.Xaml.Media.Animation;
+using CryptFolio.Helper_Classes;
 
 namespace CryptFolio
 {
@@ -30,7 +32,7 @@ namespace CryptFolio
             return null;
         }
 
-        internal void DisplayCurrencyStats(string ticker, string displayName, ref StackPanel stackPanelRight)
+        internal void DisplayCurrencyStats(string ticker, string displayName, ref StackPanel stackPanelRight, ref ScrollViewer scrollViewer)
         {
             TextBlock currencyLabel, usdLabel, btcLabel, userAmountLabel, userUSDValueLabel;
             CustomStackPanel stackPanelToUpdate;
@@ -108,6 +110,20 @@ namespace CryptFolio
                 stackPanelToUpdate.Children.Add(userUSDValueLabel);
 
                 stackPanelRight.Children.Add(stackPanelToUpdate);
+
+                PopInThemeAnimation popInAnimation = new PopInThemeAnimation
+                {
+                    Duration = new Duration(TimeSpan.FromSeconds(1)),
+                    FromHorizontalOffset = 300,
+                    TargetName = stackPanelToUpdate.Name
+                };
+
+                Storyboard.SetTarget(popInAnimation, stackPanelToUpdate);
+
+                Storyboard popInAnimationStoryboard = new Storyboard();
+                popInAnimationStoryboard.Children.Add(popInAnimation);
+                popInAnimationStoryboard.Begin();
+
             }
             else
             {
@@ -123,19 +139,29 @@ namespace CryptFolio
                 userUSDValueLabel.Text = UpdateUserUSDValueContentStr(ref stackPanelToUpdate, this.result.price_usd, labelUserUSDValueContentStr);
                 userAmountLabel = GetChildOfStackPanel(stackPanelToUpdate, labelUserAmountStr) as TextBlock;
                 userAmountLabel.Text = labelUserAmountContentStr + addedAmount.ToString();
+
+                PopInThemeAnimation popInAnimation = new PopInThemeAnimation
+                {
+                    Duration = new Duration(TimeSpan.FromSeconds(1)),
+                    FromHorizontalOffset = 300,
+                    TargetName = userUSDValueLabel.Name
+                };
+
+                Storyboard.SetTarget(popInAnimation, userUSDValueLabel);
+
+                Storyboard popInAnimationStoryboard = new Storyboard();
+                popInAnimationStoryboard.Children.Add(popInAnimation);
+                popInAnimationStoryboard.Begin();
             }
 
-            // update total values
-            //UpdateTotalValue();
+            UIHelperClass.ScrollToElement(scrollViewer, stackPanelToUpdate);
         }
 
         internal double CalculateTotalInvestmentValue(ref StackPanel stackPanelRight)
         {
             double totalInvestmentValue = 0.0;
             foreach (CustomStackPanel child in stackPanelRight.Children)
-            {
                 totalInvestmentValue += child.UserValue;
-            }
 
             return totalInvestmentValue;
         }
@@ -146,13 +172,9 @@ namespace CryptFolio
             sP.UserValue = addedAmount * Convert.ToDouble(priceStr);
 
             if (addedAmount == 0.0)
-            {
                 contentStr += "N/A";
-            }
             else
-            {
                 contentStr += "$" + sP.UserValue.ToString();
-            }
 
             return contentStr;
         }
