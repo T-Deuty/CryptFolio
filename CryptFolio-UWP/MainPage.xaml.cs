@@ -23,6 +23,8 @@ namespace CryptFolio
             this.InitializeComponent();
             this.nameDictionary = App.apiObj.GetNameDictionary();
             this.portfolioList = new PortfolioList();
+            this.LoadPreviousCoins();
+
         }
         private void AddCurrenciesToMarketView()
         {
@@ -200,7 +202,33 @@ namespace CryptFolio
         {
             textBlockTotalValue.Text = "Total investment value: $" + portfolioList.CalculateTotalInvestmentValue(ref stackPanelRight).ToString();
         }
-    }
 
-    
+        public void LoadPreviousCoins()
+        {
+            //Gets all coins previously stored
+            List<DataAccessLibrary.DataAccess.CoinInfoClass> checkCoins = DataAccessLibrary.DataAccess.GetDataEntries();
+
+            try
+            {
+                //Traverse SQLite table and add all coins to view
+                for (int i = 0; i < checkCoins.Count; i++)
+                {
+                    var currentTime = DateTimeOffset.Now.ToUnixTimeSeconds();
+                    string selectedItem = checkCoins[i].theCoinsFullName;
+                    string id = checkCoins[i].theCoinsName;
+                    portfolioList.addedAmount = checkCoins[i].theCoinsAmount;
+  
+                    portfolioList.result = App.apiObj.RetrieveJSONById(id);
+                    //InitialLoad_DisplayCurrencyStats(id, selectedItem); 
+                    portfolioList.DisplayCurrencyStats(id, selectedItem, ref stackPanelRight, ref PortfolioListScrollViewer, true);
+                    // TODO add error handler 
+                    UpdateTotalValue();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+    }
 }
