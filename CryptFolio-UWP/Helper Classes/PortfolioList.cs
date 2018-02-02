@@ -32,7 +32,98 @@ namespace CryptFolio
             return null;
         }
 
-        internal void DisplayCurrencyStats(string ticker, string displayName, ref StackPanel stackPanelRight, ref ScrollViewer scrollViewer)
+        internal void DisplayCurrencyStats(string ticker, string displayName, ref StackPanel stackPanelRight, ref ScrollViewer scrollViewer, bool initialLoad = false)
+        {
+            PrepareAndAddCurrencyStats(ticker, displayName, ref stackPanelRight, ref scrollViewer);
+            if (!initialLoad)
+                AddToDB(ticker, displayName);
+        }
+
+        private void AddToDB(string ticker, string displayName)
+        {
+            //Add Value into the Portfolio_Main Table
+            DataAccessLibrary.DataAccess.AddDataEntries(ticker, displayName, addedAmount);
+        }
+
+        //internal void InitialLoad_DisplayCurrencyStats(string ticker, string displayName, ref StackPanel stackPanelRight)
+        //{
+        //    TextBlock currencyLabel, usdLabel, btcLabel, userAmountLabel, userUSDValueLabel;
+        //    CustomStackPanel stackPanelToUpdate;
+
+        //    string
+        //        stackPanelStr = ticker + "StackPanel",
+        //        labelStr = ticker + "Label",
+        //        labelContentStr = displayName + " Stats:",
+        //        labelUSDStr = ticker + "USD",
+        //        labelUSDContentStr = "USD Price: $" + result.price_usd,
+        //        labelBTCStr = ticker + "BTC",
+        //        labelBTCContentStr = "BTC Price: " + result.price_btc,
+        //        labelUserAmountStr = ticker + "UserAmount",
+        //        labelUserAmountContentStr = "Amount you own: ",
+        //        labelUserUSDValueStr = ticker + "UserUSDVal",
+        //        labelUserUSDValueContentStr = "Your estimated USD value: ";
+
+        //    // add label if currency not already displayed
+        //    stackPanelToUpdate = GetChildOfStackPanel(stackPanelRight, stackPanelStr) as CustomStackPanel;
+
+        //    // create new StackPanel to hold labels
+        //    stackPanelToUpdate = new CustomStackPanel
+        //    {
+        //        Name = stackPanelStr,
+        //        Margin = new Thickness(5, 0, 5, 5)
+        //    };
+
+        //    // create and add currency label
+        //    currencyLabel = new TextBlock
+        //    {
+        //        FontWeight = FontWeights.Bold,
+        //        FontSize = 32,
+        //        Text = labelContentStr,
+        //        Name = labelStr
+        //    };
+        //    stackPanelToUpdate.Children.Add(currencyLabel);
+
+        //    // create and add usdLabel
+        //    usdLabel = new TextBlock
+        //    {
+        //        Name = labelUSDStr,
+        //        FontSize = 22,
+        //        Text = labelUSDContentStr
+        //    };
+        //    stackPanelToUpdate.Children.Add(usdLabel);
+
+        //    // create and add btcLabel
+        //    btcLabel = new TextBlock
+        //    {
+        //        Name = labelBTCStr,
+        //        FontSize = 22,
+        //        Text = labelBTCContentStr
+        //    };
+        //    stackPanelToUpdate.Children.Add(btcLabel);
+
+        //    // create and add user holding amount label
+        //    userAmountLabel = new TextBlock
+        //    {
+        //        Name = labelUserAmountStr,
+        //        FontSize = 22,
+        //        Text = labelUserAmountContentStr + addedAmount.ToString()
+        //    };
+        //    stackPanelToUpdate.Children.Add(userAmountLabel);
+
+        //    // create and add userUSDValue label
+        //    userUSDValueLabel = new TextBlock
+        //    {
+        //        Name = labelUserUSDValueStr,
+        //        FontSize = 22,
+        //        Text = UpdateUserUSDValueContentStr(ref stackPanelToUpdate, this.result.price_usd, labelUserUSDValueContentStr),
+        //        Foreground = new SolidColorBrush(Colors.ForestGreen)
+        //    };
+        //    stackPanelToUpdate.Children.Add(userUSDValueLabel);
+
+        //    stackPanelRight.Children.Add(stackPanelToUpdate);
+        //}
+
+        private void PrepareAndAddCurrencyStats(string ticker, string displayName, ref StackPanel stackPanelRight, ref ScrollViewer scrollViewer)
         {
             TextBlock currencyLabel, usdLabel, btcLabel, userAmountLabel, userUSDValueLabel;
             CustomStackPanel stackPanelToUpdate;

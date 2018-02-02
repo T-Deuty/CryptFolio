@@ -202,10 +202,6 @@ namespace CryptFolio
         {
             textBlockTotalValue.Text = "Total investment value: $" + portfolioList.CalculateTotalInvestmentValue(ref stackPanelRight).ToString();
         }
-    }
-
-            return contentStr;
-        }
 
         public void LoadPreviousCoins()
         {
@@ -220,11 +216,13 @@ namespace CryptFolio
                     var currentTime = DateTimeOffset.Now.ToUnixTimeSeconds();
                     string selectedItem = checkCoins[i].theCoinsFullName;
                     string id = checkCoins[i].theCoinsName;
-                    addedAmount = checkCoins[i].theCoinsAmount;
+                    portfolioList.addedAmount = checkCoins[i].theCoinsAmount;
   
-                    result = App.apiObj.RetrieveJSONById(id);                       
-                    InitialLoad_DisplayCurrencyStats(id, selectedItem); 
-                        // TODO add error handler 
+                    portfolioList.result = App.apiObj.RetrieveJSONById(id);
+                    //InitialLoad_DisplayCurrencyStats(id, selectedItem); 
+                    portfolioList.DisplayCurrencyStats(id, selectedItem, ref stackPanelRight, ref PortfolioListScrollViewer, true);
+                    // TODO add error handler 
+                    UpdateTotalValue();
                 }
             }
             catch (Exception ex)
@@ -232,86 +230,5 @@ namespace CryptFolio
                 Console.WriteLine(ex.Message);
             }
         }
-
-        private void InitialLoad_DisplayCurrencyStats(string ticker, string displayName)
-        {
-            TextBlock currencyLabel, usdLabel, btcLabel, userAmountLabel, userUSDValueLabel;
-            CustomStackPanel stackPanelToUpdate;
-
-            string
-                stackPanelStr = ticker + "StackPanel",
-                labelStr = ticker + "Label",
-                labelContentStr = displayName + " Stats:",
-                labelUSDStr = ticker + "USD",
-                labelUSDContentStr = "USD Price: $" + result.price_usd,
-                labelBTCStr = ticker + "BTC",
-                labelBTCContentStr = "BTC Price: " + result.price_btc,
-                labelUserAmountStr = ticker + "UserAmount",
-                labelUserAmountContentStr = "Amount you own: ",
-                labelUserUSDValueStr = ticker + "UserUSDVal",
-                labelUserUSDValueContentStr = "Your estimated USD value: ";
-
-            // add label if currency not already displayed
-            stackPanelToUpdate = GetChildOfStackPanel(stackPanelRight, stackPanelStr) as CustomStackPanel;
-
-            // create new StackPanel to hold labels
-            stackPanelToUpdate = new CustomStackPanel
-            {
-                Name = stackPanelStr,
-                Margin = new Thickness(5, 0, 5, 5)
-            };
-
-            // create and add currency label
-            currencyLabel = new TextBlock
-            {
-                FontWeight = FontWeights.Bold,
-                FontSize = 32,
-                Text = labelContentStr,
-                Name = labelStr
-            };
-            stackPanelToUpdate.Children.Add(currencyLabel);
-
-            // create and add usdLabel
-            usdLabel = new TextBlock
-            {
-                Name = labelUSDStr,
-                FontSize = 22,
-                Text = labelUSDContentStr
-            };
-            stackPanelToUpdate.Children.Add(usdLabel);
-
-            // create and add btcLabel
-            btcLabel = new TextBlock
-            {
-                Name = labelBTCStr,
-                FontSize = 22,
-                Text = labelBTCContentStr
-            };
-            stackPanelToUpdate.Children.Add(btcLabel);
-
-            // create and add user holding amount label
-            userAmountLabel = new TextBlock
-            {
-                Name = labelUserAmountStr,
-                FontSize = 22,
-                Text = labelUserAmountContentStr + addedAmount.ToString()
-            };
-            stackPanelToUpdate.Children.Add(userAmountLabel);
-
-            // create and add userUSDValue label
-            userUSDValueLabel = new TextBlock
-            {
-                Name = labelUserUSDValueStr,
-                FontSize = 22,
-                Text = UpdateUserUSDValueContentStr(ref stackPanelToUpdate, this.result.price_usd, labelUserUSDValueContentStr),
-                Foreground = new SolidColorBrush(Colors.ForestGreen)
-            };
-            stackPanelToUpdate.Children.Add(userUSDValueLabel);
-
-            stackPanelRight.Children.Add(stackPanelToUpdate);
-            
-            UpdateTotalValue();
-        }
-
     }
 }
