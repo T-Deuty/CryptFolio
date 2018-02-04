@@ -171,24 +171,14 @@ namespace CryptFolio
             // Error handling if user does not enter numeric input
             try
             {
-                try
-                {
-                    portfolioList.addedAmount = Convert.ToDouble(amountOwnedBox.Text);
-                    portfolioList.addedAmount = Math.Round(portfolioList.addedAmount, 6);
-                }
-                catch (Exception)
-                {
-                    amountOwnedBox.Text = portfolioList.addedAmount.ToString();
-                    FlyoutBase.ShowAttachedFlyout(amountOwnedBox);
-                }
+                portfolioList.addedAmount = Convert.ToDouble(amountOwnedBox.Text);
+                portfolioList.addedAmount = Math.Round(portfolioList.addedAmount, 6);
             }
-
-            catch
+            catch (Exception)
             {
-                Console.WriteLine("Invalid input! Please enter numbers only");
-                amountOwnedBox.Text = "";
+                amountOwnedBox.Text = portfolioList.addedAmount.ToString();
+                FlyoutBase.ShowAttachedFlyout(amountOwnedBox);
             }
-
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
