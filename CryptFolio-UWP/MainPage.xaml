@@ -48,7 +48,7 @@
 								</FlyoutBase.AttachedFlyout>
 							</TextBox>
 
-							<Button x:Name="buttonAddAmount" IsEnabled="False" Width="Auto" Foreground="Black" Height="Auto" HorizontalAlignment="Center" Content="Add/Refresh" Click="ButtonAddAmount_Click" Style="{StaticResource ButtonRevealStyle}" Margin="0,20,0,0" IsDoubleTapEnabled="True"/>
+							<Button x:Name="buttonAddAmount" IsEnabled="False" Width="Auto" Foreground="Black" Height="Auto" HorizontalAlignment="Center" Content="Add/Refresh" Click="ButtonAddAmount_Click" Style="{StaticResource ButtonRevealStyle}" Margin="0,20,0,0"/>
 
 							<TextBlock x:Name="textBlockTotalValue" TextWrapping="Wrap" Margin="5,75,5,0" FontSize="20" HorizontalAlignment="Center" Text="Total investment value: N/A" Foreground="ForestGreen"/>
 						</StackPanel>

@@ -11,5 +11,6 @@ namespace CryptFolio
     class CustomStackPanel : StackPanel
     {
         public double UserValue { get; set; }
+        public Button RemoveButton { get; set; }
     }
 }

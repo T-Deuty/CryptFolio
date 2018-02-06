@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI;
 using Windows.UI.Xaml.Media.Animation;
 using CryptFolio.Helper_Classes;
+using Windows.UI.Xaml.Input;
 
 namespace CryptFolio
 {
@@ -13,28 +14,24 @@ namespace CryptFolio
     {
         internal TickerJSONResult result;
         internal double addedAmount;
+        internal StackPanel rightStackPanelRef;
 
-        public PortfolioList()
-        {
-
-        }
+        public PortfolioList() { }
 
         private FrameworkElement GetChildOfStackPanel(StackPanel parentPanel, string name)
         {
             foreach (FrameworkElement child in parentPanel.Children)
-            {
                 if (child.Name == name)
-                {
                     return child;
-                }
-            }
-
             return null;
         }
 
         internal void DisplayCurrencyStats(string ticker, string displayName, ref StackPanel stackPanelRight, ref ScrollViewer scrollViewer, bool initialLoad = false)
         {
-            PrepareAndAddCurrencyStats(ticker, displayName, ref stackPanelRight, ref scrollViewer);
+            rightStackPanelRef = stackPanelRight;
+
+            //PrepareAndAddCurrencyStats(ticker, displayName, ref stackPanelRight, ref scrollViewer);
+            PrepareAndAddCurrencyStats(ticker, displayName, ref scrollViewer);
             if (!initialLoad)
                 AddToDB(ticker, displayName);
         }
@@ -123,7 +120,9 @@ namespace CryptFolio
         //    stackPanelRight.Children.Add(stackPanelToUpdate);
         //}
 
-        private void PrepareAndAddCurrencyStats(string ticker, string displayName, ref StackPanel stackPanelRight, ref ScrollViewer scrollViewer)
+        //private void PrepareAndAddCurrencyStats(string ticker, string displayName, ref StackPanel stackPanelRight, ref ScrollViewer scrollViewer)
+        //private void PrepareAndAddCurrencyStats(string ticker, string displayName, ref StackPanel stackPanelRight, ref ScrollViewer scrollViewer)
+        private void PrepareAndAddCurrencyStats(string ticker, string displayName, ref ScrollViewer scrollViewer)
         {
             TextBlock currencyLabel, usdLabel, btcLabel, userAmountLabel, userUSDValueLabel;
             CustomStackPanel stackPanelToUpdate;
@@ -142,7 +141,7 @@ namespace CryptFolio
                 labelUserUSDValueContentStr = "Your estimated USD value: ";
 
             // add label if currency not already displayed
-            stackPanelToUpdate = GetChildOfStackPanel(stackPanelRight, stackPanelStr) as CustomStackPanel;
+            stackPanelToUpdate = GetChildOfStackPanel(rightStackPanelRef, stackPanelStr) as CustomStackPanel;
 
             if (stackPanelToUpdate == null)
             {
@@ -153,15 +152,56 @@ namespace CryptFolio
                     Margin = new Thickness(5, 0, 5, 5)
                 };
 
-                // create and add currency label
+                stackPanelToUpdate.PointerEntered += PointerEnteredStackPanel;
+                stackPanelToUpdate.PointerExited += PointerExitedStackPanel;
+
+                ColumnDefinition currencyLabelColumnDefinitionLeft = new ColumnDefinition
+                {
+                    Width = new GridLength(8, GridUnitType.Star)
+                };
+                ColumnDefinition currencyLabelColumnDefinitionRight = new ColumnDefinition
+                {
+                    Width = new GridLength(2, GridUnitType.Star)
+                };
+
+                // create and add currency grid
+                Grid currencyGrid = new Grid
+                {
+                    HorizontalAlignment = HorizontalAlignment.Left
+                };
+
+                currencyGrid.ColumnDefinitions.Add(currencyLabelColumnDefinitionLeft);
+                currencyGrid.ColumnDefinitions.Add(currencyLabelColumnDefinitionRight);
+
                 currencyLabel = new TextBlock
                 {
                     FontWeight = FontWeights.Bold,
-                    FontSize = 32,
+                    FontSize = 40,
                     Text = labelContentStr,
                     Name = labelStr
                 };
-                stackPanelToUpdate.Children.Add(currencyLabel);
+                currencyGrid.Children.Add(currencyLabel);
+                Grid.SetColumn(currencyLabel, 0);
+
+                //Button deleteCurrencyButton = new Button
+                stackPanelToUpdate.RemoveButton = new Button
+                {
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Content = new SymbolIcon(Symbol.Clear),
+                    Tag = stackPanelStr,
+                    Background = new SolidColorBrush { Opacity = 0 },
+                    Opacity = 0,
+                    IsEnabled = false
+                };
+
+                stackPanelToUpdate.RemoveButton.Click += RemoveCurrencyStatsForCurrency;
+
+                currencyGrid.Children.Add(stackPanelToUpdate.RemoveButton);
+                Grid.SetColumn(stackPanelToUpdate.RemoveButton, 1);
+
+                //stackPanelToUpdate.Children.Add(currencyLabel);
+                stackPanelToUpdate.Children.Add(currencyGrid);
 
                 // create and add usdLabel
                 usdLabel = new TextBlock
@@ -200,7 +240,7 @@ namespace CryptFolio
                 };
                 stackPanelToUpdate.Children.Add(userUSDValueLabel);
 
-                stackPanelRight.Children.Add(stackPanelToUpdate);
+                rightStackPanelRef.Children.Add(stackPanelToUpdate);
 
                 PopInThemeAnimation popInAnimation = new PopInThemeAnimation
                 {
@@ -246,6 +286,26 @@ namespace CryptFolio
             }
 
             UIHelperClass.ScrollToElement(scrollViewer, stackPanelToUpdate);
+        }
+
+        private void PointerExitedStackPanel(object sender, PointerRoutedEventArgs e)
+        {
+            CustomStackPanel sP = sender as CustomStackPanel;
+            sP.RemoveButton.Opacity = 0;
+            sP.RemoveButton.IsEnabled = false;
+        }
+
+        private void PointerEnteredStackPanel(object sender, PointerRoutedEventArgs e)
+        {
+            CustomStackPanel sP = sender as CustomStackPanel;
+            sP.RemoveButton.Opacity = 100;
+            sP.RemoveButton.IsEnabled = true;
+        }
+
+        private void RemoveCurrencyStatsForCurrency(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            rightStackPanelRef.Children.Remove(GetChildOfStackPanel(rightStackPanelRef, button.Tag.ToString()));
         }
 
         internal double CalculateTotalInvestmentValue(ref StackPanel stackPanelRight)
