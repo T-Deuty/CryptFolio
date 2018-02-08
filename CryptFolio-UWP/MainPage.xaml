@@ -40,7 +40,15 @@
 
 							<TextBlock x:Name="textBlockAddUserHolding" TextWrapping="Wrap" Text="Add amount owned:" FontSize="30" HorizontalAlignment="Center" Margin="0,10,0,0"/>
 
-							<TextBox x:Name="amountOwnedBox" Height="31" Width="400" HorizontalAlignment="Center" TextChanged="AmountOwnedBox_TextChanged" Margin="0,10,0,0" FontSize="16" VerticalAlignment="Center" PlaceholderText="Amount" InputScope="Number">
+							<TextBox x:Name="amountOwnedBox" 
+									 Height="31" Width="400"
+									 HorizontalAlignment="Center"
+									 TextChanged="AmountOwnedBox_TextChanged"
+									 Margin="0,10,0,0" FontSize="16"
+									 VerticalAlignment="Center"
+									 PlaceholderText="Amount"
+									 InputScope="Number"
+									 KeyDown="amountOwnedBox_KeyDown">
 								<FlyoutBase.AttachedFlyout>
 									<Flyout Placement="Right">
 										<TextBlock Text="Please only enter numbers"  />
