@@ -81,7 +81,9 @@ namespace DataAccessLibrary
                     updateCommand.Parameters.AddWithValue("@Val2", nameOfCoin);
                     updateCommand.ExecuteNonQuery();
                 }
-                db.Close();
+
+                if (db.State == System.Data.ConnectionState.Open)
+                    db.Close();
             }
 
         }
