@@ -113,11 +113,12 @@ namespace CryptFolio
 
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
-            // Only get results when it was a user typing, 
-            // otherwise assume the value got filled in by TextMemberPath 
-            // or the handler for SuggestionChosen.
 
-            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            if (sender.Text == "" || sender.Text == null)
+            {
+                selectedCurrency = null;
+            }
+            else if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
                 //Set the ItemsSource to be your filtered dataset
 
@@ -137,8 +138,17 @@ namespace CryptFolio
 
         private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            // Set sender.Text. You can use args.SelectedItem to build your text string.
-            sender.Text = args.SelectedItem as string;
+            try
+            {
+                // Set sender.Text. You can use args.SelectedItem to build your text string.
+                sender.Text = args.SelectedItem as string;
+                selectedCurrency = args.SelectedItem as string;
+                buttonAddAmount.IsEnabled = true;
+            } catch
+            {
+                sender.Text = "";
+                selectedCurrency = null;
+            }
         }
 
         private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
@@ -165,6 +175,7 @@ namespace CryptFolio
                 catch
                 {
                     sender.Text = "";
+                    selectedCurrency = null;
                 }
             }
         }
