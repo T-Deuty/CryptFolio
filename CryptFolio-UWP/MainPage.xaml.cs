@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Windows.UI.Core;
+using Windows.UI.ViewManagement;
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,6 +23,7 @@ namespace CryptFolio
         public MainPage()
         {
             this.InitializeComponent();
+
             this.nameDictionary = App.apiObj.GetNameDictionary();
             this.portfolioList = new PortfolioList();
             this.LoadPreviousCoins();

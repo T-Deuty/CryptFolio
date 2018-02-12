@@ -6,6 +6,8 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.ViewManagement;
+using Windows.Foundation;
 
 namespace CryptFolio
 {
@@ -26,6 +28,12 @@ namespace CryptFolio
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            ApplicationView.PreferredLaunchViewSize = new Size(1000, 1500);
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+
+            // if you want not to have any window smaller than this size...
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(1000, 1500));
 
             apiObj = new CoinMarketCapAPI();
             

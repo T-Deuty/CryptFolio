@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web.Http;
@@ -21,7 +22,10 @@ namespace CryptFolio
         //const double totalBytesToReceive = 800000;
         //int bytesReceived = 0;
 
-        public Splash() => InitializeComponent();
+        public Splash()
+        {
+            InitializeComponent();
+        }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
