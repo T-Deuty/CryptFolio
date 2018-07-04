@@ -11,7 +11,7 @@
   <PropertyGroup>
     <AppxPackageIsForStore>True</AppxPackageIsForStore>
     <AppxShowAllApps>False</AppxShowAllApps>
-    <AppxBuildConfigurationSelection>x86</AppxBuildConfigurationSelection>
+    <AppxBuildConfigurationSelection>x86|x64|arm</AppxBuildConfigurationSelection>
     <PackageOptionalProjectsInIdeBuilds>False</PackageOptionalProjectsInIdeBuilds>
     <Source>C:\Users\Tyler\Source\Repos\CryptFolio\CryptFolio-UWP\Assets\CryptfolioLogo.pdf</Source>
     <SmallTileSource>C:\Users\Tyler\Source\Repos\CryptFolio\CryptFolio-UWP\Assets\CryptfolioLogo.pdf</SmallTileSource>

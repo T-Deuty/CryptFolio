@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="44007TyDeutySoftware.Cryptfolio" Publisher="CN=26064E48-4E86-48E2-BD51-C1F954F04C88" Version="1.1.5.0" />
+  <Identity Name="44007TyDeutySoftware.Cryptfolio" Publisher="CN=26064E48-4E86-48E2-BD51-C1F954F04C88" Version="1.1.6.0" />
   <mp:PhoneIdentity PhoneProductId="8cf79ece-9f68-4c74-8cf0-43e6f10689eb" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Cryptfolio</DisplayName>

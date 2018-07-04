@@ -192,7 +192,7 @@ namespace CryptFolio
             }
             catch (Exception)
             {
-                amountOwnedBox.Text = portfolioList.addedAmount.ToString();
+                //amountOwnedBox.Text = portfolioList.addedAmount.ToString();
                 FlyoutBase.ShowAttachedFlyout(amountOwnedBox);
             }
         }
