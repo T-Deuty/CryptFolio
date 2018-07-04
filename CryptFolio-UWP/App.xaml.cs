@@ -26,14 +26,14 @@ namespace CryptFolio
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
+            //this.InitializeComponent();
+            //this.Suspending += OnSuspending;
 
             ApplicationView.PreferredLaunchViewSize = new Size(1000, 1500);
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
 
             // if you want not to have any window smaller than this size...
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(1000, 1500));
+            //ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(1000, 1500));
 
             apiObj = new CoinMarketCapAPI();
             

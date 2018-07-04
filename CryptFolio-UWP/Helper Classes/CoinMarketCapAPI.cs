@@ -25,7 +25,7 @@ namespace CryptFolio
         {
             client = new HttpClient();
             // adding "?limit=1400" to pull info for 1400 coins from API
-            string downloadStr = url + "?limit=1400";
+            string downloadStr = url + "?limit=100";
             Uri uri = new Uri(downloadStr);
             List<TickerJSONResult> list = null;
 

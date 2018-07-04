@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="10in"
+   height="10in"
+   viewBox="0 0 254 254.00001"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="CryptfolioLogo.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <title
+     id="title819">CryptfolioLogo</title>
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="84.202771"
+     inkscape:cy="471.63585"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="in"
+     inkscape:pagecheckerboard="true"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>CryptfolioLogo</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-42.999983)">
+    <path
+       style="fill:none;stroke:#000000;stroke-width:15.19198322;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       clip-path="none"
+       d="M 115.52729 392.62119 L 115.5273 126.71724 L 115.5273 126.71724 L 844.4727 126.71724 L 844.4727 392.62121 "
+       id="path4642"
+       transform="matrix(0.26458333,0,0,0.26458333,0,42.999983)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:15.19198322;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       clip-path="none"
+       d="M 844.47268 567.37879 L 844.4727 833.28278 L 115.5273 833.28278 L 115.5273 567.37881 "
+       id="path4638"
+       transform="matrix(0.26458333,0,0,0.26458333,0,42.999983)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:13.46510506px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.33662763"
+       x="29.849512"
+       y="180.50276"
+       id="text4646"><tspan
+         sodipodi:role="line"
+         id="tspan4644"
+         x="29.849512"
+         y="180.50276"
+         style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:32.31625366px;line-height:344.89334106px;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro Heavy';stroke-width:0.33662763">CRYPTFOLIO</tspan></text>
+  </g>
+</svg>
