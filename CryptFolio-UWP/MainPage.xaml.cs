@@ -182,18 +182,32 @@ namespace CryptFolio
             }
         }
 
+        private void amountOwnedBox_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                ButtonAddAmount_Click(null, null);
+            }
+        }
+
         private void AmountOwnedBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Error handling if user does not enter numeric input
-            try
+            if (amountOwnedBox.Text == "")
             {
-                portfolioList.addedAmount = Convert.ToDouble(amountOwnedBox.Text);
-                portfolioList.addedAmount = Math.Round(portfolioList.addedAmount, 6);
+                portfolioList.addedAmount = 0.0;
+                // Error handling if user does not enter numeric input
             }
-            catch (Exception)
+            else
             {
-                //amountOwnedBox.Text = portfolioList.addedAmount.ToString();
-                FlyoutBase.ShowAttachedFlyout(amountOwnedBox);
+                try
+                {
+                    portfolioList.addedAmount = Convert.ToDouble(amountOwnedBox.Text);
+                    portfolioList.addedAmount = Math.Round(portfolioList.addedAmount, 6);
+                }
+                catch (Exception)
+                {
+                    FlyoutBase.ShowAttachedFlyout(amountOwnedBox);
+                }
             }
         }
 
@@ -232,14 +246,6 @@ namespace CryptFolio
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }
-        }
-
-        private void amountOwnedBox_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
-        {
-            if (e.Key == Windows.System.VirtualKey.Enter)
-            {
-                ButtonAddAmount_Click(null, null);
             }
         }
     }
