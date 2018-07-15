@@ -5,10 +5,15 @@
     xmlns:local="using:CryptFolio"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:src="clr-namespace:Cryptfolio"
     mc:Ignorable="d">
 
 	<Grid Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}">
-		<Pivot x:Name="rootPivot" Grid.Row="1" Margin="0,20,0,20">
+		<Grid.Resources>
+			<local:MarketViewTemplates x:Key="marketViewTemplates"/>
+		</Grid.Resources>
+
+		<Pivot x:Name="rootPivot" Grid.Row="1" Margin="0,20,0,20" Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}">
 			<Pivot.HeaderTemplate>
 				<DataTemplate>
 					<TextBlock Text="{Binding}" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0,0,0,20"/>
@@ -18,7 +23,20 @@
 			<PivotItem Header="Coin Markets" FontFamily="Segoe UI">
 				<!--Pivot content goes here-->
 				<ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,20,0,0">
-					<StackPanel x:Name="mainStackTrackerPage" HorizontalAlignment="Stretch" />
+					<!--<StackPanel x:Name="mainStackTrackerPage" HorizontalAlignment="Stretch">
+					</StackPanel>-->
+					<ListBox ItemsSource="{StaticResource marketViewTemplates}" MinWidth="350" Margin="0,5,0,10" HorizontalAlignment="Stretch" Background="{ThemeResource SystemControlAccentDark1AcrylicWindowAccentDark1Brush}">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+									<StackPanel Padding="5,5,5,5">
+										<TextBlock Text="{Binding currencyName}" Foreground="AntiqueWhite" FontWeight="Bold" FontSize="18"/>
+										<TextBlock Text="{Binding currencyUSDPrice}" Foreground="AntiqueWhite"/>
+									</StackPanel>
+								</StackPanel>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
 				</ScrollViewer>
 			</PivotItem>
 			<PivotItem Header="My Portfolio">
