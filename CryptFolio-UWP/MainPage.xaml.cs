@@ -29,14 +29,14 @@ namespace CryptFolio
             this.LoadPreviousCoins();
 
         }
-        private void AddCurrenciesToMarketView()
-        {
-            CurrencyStackPanelBuilder spBuilder = new CurrencyStackPanelBuilder();
-            foreach (TickerJSONResult result in App.jsonList)
-            {
-                mainStackTrackerPage.Children.Add(spBuilder.BuildGrid(result));
-            }
-        }
+        //private void AddCurrenciesToMarketView()
+        //{
+        //    CurrencyStackPanelBuilder spBuilder = new CurrencyStackPanelBuilder();
+        //    foreach (TickerJSONResult result in App.jsonList)
+        //    {
+        //        mainStackTrackerPage.Children.Add(spBuilder.BuildGrid(result));
+        //    }
+        //}
         
         // BUTTON CLICK HANDLER
         private void ButtonAddAmount_Click(object sender, RoutedEventArgs e)
@@ -213,7 +213,7 @@ namespace CryptFolio
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            AddCurrenciesToMarketView();
+            //AddCurrenciesToMarketView();
         }
 
         private void UpdateTotalValue()
