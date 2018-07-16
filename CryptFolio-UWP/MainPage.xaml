@@ -22,49 +22,60 @@
 
 			<PivotItem Header="Coin Markets" FontFamily="Segoe UI">
 				<!--Pivot content goes here-->
-				<ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,20,0,0">
-					<!--<StackPanel x:Name="mainStackTrackerPage" HorizontalAlignment="Stretch">
-					</StackPanel>-->
-					<ListBox ItemsSource="{StaticResource marketViewTemplates}" MinWidth="350" Margin="0,5,0,10" Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}">
-						<ListBox.ItemTemplate>
-							<DataTemplate>
-								<Grid HorizontalAlignment="Left" Background="{ThemeResource SystemControlBackgroundAccentBrush}" CornerRadius="5" Padding="10,5,0,5" Margin="5,0,0,0">
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition MinWidth="250" />
-										<ColumnDefinition MinWidth="250" />
-										<ColumnDefinition MinWidth="250" />
-									</Grid.ColumnDefinitions>
-									<Grid.RowDefinitions>
-										<RowDefinition Height="*"/>
-										<RowDefinition Height="*"/>
-										<RowDefinition Height="*"/>
-									</Grid.RowDefinitions>
-									<!--<StackPanel Grid.Column="0" Padding="5,5,5,5">
-										<TextBlock Text="{Binding currencyName}" Foreground="AntiqueWhite" FontWeight="Bold" FontSize="18"/>
-										<TextBlock Text="{Binding currencyUSDPrice}" Foreground="AntiqueWhite"/>
-									</StackPanel>-->
-									<TextBlock Text="Currency" Foreground="AntiqueWhite" FontWeight="Bold" FontSize="19" Grid.Column="0" Grid.Row="0" Margin="0,0,0,10"/>
-									<TextBlock Text="Price Changes" Foreground="AntiqueWhite" FontWeight="Bold" FontSize="19" Grid.Column="1" Grid.Row="0"/>
-									<TextBlock Text="Market" Foreground="AntiqueWhite" FontWeight="Bold" FontSize="19" Grid.Column="2" Grid.Row="0"/>
-									<StackPanel Grid.Column="0" Grid.Row="1">
-										<TextBlock Text="{Binding currencyName}" Foreground="Cyan" FontWeight="Bold" FontSize="20"/>
-										<TextBlock Text="{Binding currencyUSDPrice}" Foreground="AntiqueWhite" Padding="0,0,0,5"/>
-									</StackPanel>
-									<StackPanel Grid.Column="1" Grid.Row="1">
-										<TextBlock Text="{Binding currencyPercentChange1hr}" Foreground="AntiqueWhite"/>
-										<TextBlock Text="{Binding currencyPercentChange24hr}" Foreground="AntiqueWhite"/>
-										<TextBlock Text="{Binding currencyPercentChange1wk}" Foreground="AntiqueWhite"/>
-									</StackPanel>
-									<StackPanel Grid.Column="2" Grid.Row="1">
-										<TextBlock Text="{Binding currencyMarketCap}" Foreground="AntiqueWhite"/>
-										<TextBlock Text="{Binding currencyCirculatingSupply}" Foreground="AntiqueWhite"/>
-										<TextBlock Text="{Binding currencyTotalSupply}" Foreground="AntiqueWhite"/>
-									</StackPanel>
-								</Grid>
-							</DataTemplate>
-						</ListBox.ItemTemplate>
-					</ListBox>
-				</ScrollViewer>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" MinWidth="500"/>
+						<ColumnDefinition Width="2*" MinWidth="500"/>
+					</Grid.ColumnDefinitions>
+					<ScrollViewer VerticalAlignment="Stretch" Grid.Column="0">
+						<ListView IsItemClickEnabled="False" SelectionMode="Single" SelectionChanged="ListView_SelectionChanged" ItemsSource="{StaticResource marketViewTemplates}" Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}">
+							<ListView.ItemTemplate>
+								<DataTemplate>
+									<Grid HorizontalAlignment="Stretch" Background="{ThemeResource SystemControlBackgroundAccentBrush}" CornerRadius="5" Padding="10" Margin="5">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" MinWidth="100"/>
+											<ColumnDefinition Width="2*" MinWidth="200"/>
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition/>
+											<RowDefinition/>
+											<RowDefinition/>
+										</Grid.RowDefinitions>
+										<TextBlock Text="Currency" Foreground="AntiqueWhite" FontWeight="Bold" FontSize="19" Grid.Column="0" Grid.Row="0" Margin="0,0,0,5"/>
+										<TextBlock Text="Price Change Percentages" Foreground="AntiqueWhite" FontWeight="Bold" FontSize="19" Grid.Column="1" Grid.Row="0"/>
+										<StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
+											<TextBlock Text="{Binding currencyName}" Foreground="Cyan" FontWeight="Bold" FontSize="20"/>
+											<TextBlock Text="{Binding currencyUSDPrice}" Foreground="AntiqueWhite"/>
+										</StackPanel>
+										<StackPanel Grid.Column="1" Grid.Row="1">
+											<TextBlock Text="{Binding currencyPercentChange1hr}" Foreground="AntiqueWhite"/>
+											<TextBlock Text="{Binding currencyPercentChange24hr}" Foreground="AntiqueWhite"/>
+											<TextBlock Text="{Binding currencyPercentChange1wk}" Foreground="AntiqueWhite" Padding="0,0,0,5"/>
+										</StackPanel>
+									</Grid>
+								</DataTemplate>
+							</ListView.ItemTemplate>
+							<ListView.ItemContainerStyle>
+								<Style TargetType="ListViewItem">
+									<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+								</Style>
+							</ListView.ItemContainerStyle>
+						</ListView>
+					</ScrollViewer>
+					
+					<!--Right item of the stack panel-->
+					<StackPanel Grid.Column="1" Margin="50">
+						<TextBlock x:Name="moreDetailsCurrencyName" FontWeight="ExtraBold" FontSize="50"/>
+						<TextBlock x:Name="moreDetailsUSDPrice" FontSize="25"/>
+						<TextBlock x:Name="moreDetailsBTCPrice" FontSize="25"/>
+						<TextBlock x:Name="moreDetailsMarketCap" FontSize="25"/>
+						<TextBlock x:Name="moreDetailsCirculatingSupply" FontSize="25"/>
+						<TextBlock x:Name="moreDetailsTotalSupply" FontSize="25"/>
+						<TextBlock x:Name="moreDetailsPercentChange1hr" FontSize="25"/>
+						<TextBlock x:Name="moreDetailsPercentChange24hr" FontSize="25"/>
+						<TextBlock x:Name="moreDetailsPercentChange1wk" FontSize="25"/>
+					</StackPanel>
+				</Grid>
 			</PivotItem>
 			<PivotItem Header="My Portfolio">
 				<Border Margin="10" Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}">

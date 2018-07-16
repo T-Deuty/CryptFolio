@@ -23,4 +23,7 @@
     <BadgeLogoSource>C:\Users\Tyler\Source\Repos\CryptFolio\CryptFolio-UWP\Assets\CryptfolioLogo.pdf</BadgeLogoSource>
     <PackageLogoSource>C:\Users\Tyler\Source\Repos\CryptFolio\CryptFolio-UWP\Assets\CryptfolioLogo.pdf</PackageLogoSource>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <EnableUnmanagedDebugging>true</EnableUnmanagedDebugging>
+  </PropertyGroup>
 </Project>
