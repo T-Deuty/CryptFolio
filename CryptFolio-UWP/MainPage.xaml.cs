@@ -29,14 +29,6 @@ namespace CryptFolio
             this.LoadPreviousCoins();
 
         }
-        //private void AddCurrenciesToMarketView()
-        //{
-        //    CurrencyStackPanelBuilder spBuilder = new CurrencyStackPanelBuilder();
-        //    foreach (TickerJSONResult result in App.jsonList)
-        //    {
-        //        mainStackTrackerPage.Children.Add(spBuilder.BuildGrid(result));
-        //    }
-        //}
         
         // BUTTON CLICK HANDLER
         private void ButtonAddAmount_Click(object sender, RoutedEventArgs e)
@@ -246,6 +238,26 @@ namespace CryptFolio
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                MarketViewTemplate selection = (MarketViewTemplate)e.AddedItems[0];
+                moreDetailsCurrencyName.Text = selection.currencyName;
+                moreDetailsUSDPrice.Text = selection.currencyUSDPrice;
+                moreDetailsBTCPrice.Text = selection.currencyBTCPrice;
+                moreDetailsMarketCap.Text = selection.currencyMarketCap;
+                moreDetailsCirculatingSupply.Text = selection.currencyCirculatingSupply;
+                moreDetailsTotalSupply.Text = selection.currencyTotalSupply;
+                moreDetailsPercentChange1hr.Text = selection.currencyPercentChange1hr;
+                moreDetailsPercentChange24hr.Text = selection.currencyPercentChange24hr;
+                moreDetailsPercentChange1wk.Text = selection.currencyPercentChange1wk;
+            } catch (Exception ex)
+            {
+                Console.WriteLine("Uh oh");
             }
         }
     }

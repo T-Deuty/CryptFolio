@@ -37,9 +37,9 @@ namespace CryptFolio
             this.currencyMarketCap = "Market Cap: $" + currencyMarketCap;
             this.currencyCirculatingSupply = "Circulating supply: " + currencyCirculatingSupply;
             this.currencyTotalSupply = "Total supply: " + currencyTotalSupply;
-            this.currencyPercentChange1hr = "Percent Change (1hr): " + currencyPercentChange1hr + "%";
-            this.currencyPercentChange24hr = "Percent Change (24hr): " + currencyPercentChange24hr + "%";
-            this.currencyPercentChange1wk = "Percent Change (1 week): " + currencyPercentChange1wk + "%";
+            this.currencyPercentChange1hr = "Hour Percent Change: " + currencyPercentChange1hr + "%";
+            this.currencyPercentChange24hr = "Day Percent Change: " + currencyPercentChange24hr + "%";
+            this.currencyPercentChange1wk = "Week Percent Change: " + currencyPercentChange1wk + "%";
         }
     }
 
